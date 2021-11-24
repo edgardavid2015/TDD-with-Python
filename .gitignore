@@ -1,0 +1,14 @@
+**/.DS_Store
+
+# Virtual environment
+.venv
+
+# PyCharm files
+.idea
+
+# DS_Store
+sum/.DS_Store
+
+# pycache
+password/__pycache__
+sum/__pycache__

@@ -9,10 +9,16 @@ import pytest
 from password import password_validator
 
 
-def test_show_error_message_when_password_length_is_less_than_eight_char():
-    assert password_validator('12345') == 'Password length must be greater than 8 characters'
+@pytest.mark.parametrize('invalid_length_passwords', ['1234', '12345', '1234567'])
+def test_show_error_message_when_password_length_is_less_than_eight_char(invalid_length_passwords):
+    assert password_validator(invalid_length_passwords) == 'Password length must be greater than 8 characters'
 
 
-def test_show_accept_message_when_password_length_is_eight_or_more_char():
-    assert password_validator('12345678') == 'Password accepted'
+@pytest.mark.parametrize('invalid_numbers_in_password', ['1Aabbccdd', 'tuvWxyz1', '1passworD'])
+def test_show_error_message_when_password_has_less_than_two_numbers(invalid_numbers_in_password):
+    assert password_validator(invalid_numbers_in_password) == 'Password must have at least 2 numbers'
 
+
+@pytest.mark.parametrize('invalid_uppercase_letters_passwords', ['01aabbccdd', 'mnopq1234', 'p4ssw0rd'])
+def test_show_error_message_when_password_has_less_than_one_uppercase_letter(invalid_uppercase_letters_passwords):
+    assert password_validator(invalid_uppercase_letters_passwords) == 'Password must have at least one uppercase letter'
